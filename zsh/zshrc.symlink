@@ -39,3 +39,8 @@ do
 done
 
 unset config_files
+
+# Virtualenv
+
+export WORKON_HOME=~/.envs
+source /usr/local/bin/virtualenvwrapper.sh
