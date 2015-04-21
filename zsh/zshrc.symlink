@@ -40,7 +40,13 @@ done
 
 unset config_files
 
+# Python
+
+PATH=/usr/local/Cellar/python3/3.4.3/Frameworks/Python.framework/Versions/3.4/bin:$PATH
+export PATH
+
 # Virtualenv
 
 export WORKON_HOME=~/.envs
+export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
 source /usr/local/bin/virtualenvwrapper.sh
