@@ -64,3 +64,11 @@ export PATH
 export WORKON_HOME=~/.envs
 export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
 source /usr/local/bin/virtualenvwrapper.sh
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
+
+# Node virtualenv
+
+export NVM_DIR=~/.nvm
+source $(brew --prefix nvm)/nvm.sh
