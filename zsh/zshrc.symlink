@@ -68,6 +68,10 @@ source /usr/local/bin/virtualenvwrapper.sh
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 
+# Dynamically set NPM_TOKEN from .npmrc
+
+export NPM_TOKEN=$(cat ~/.npmrc | sed -e "s/^\/\/registry\.npmjs\.org\/:_authToken=//")
+
 # Node virtualenv
 
 export NVM_DIR=~/.nvm
@@ -82,3 +86,7 @@ source '/Users/chrisforrette/Downloads/google-cloud-sdk/completion.zsh.inc'
 # Stop trying to correct 'tsc'
 
 alias tsc='nocorrect tsc'
+
+# Stop trying to correct 'serverless'
+
+alias serverless='nocorrect serverless'
