@@ -97,6 +97,12 @@ alias serverless='nocorrect serverless'
 # Installation: doing completion >> ~/.bashrc
 #    or doing completion >> ~/.bash_profile on OSX.
 #
+
+# Load ZSH `complete`
+
+autoload bashcompinit
+bashcompinit
+
 _yargs_completions()
 {
     local cur_word args type_list
@@ -120,4 +126,9 @@ complete -F _yargs_completions doing
 ###-end-doing-completions-###
 PATH="/usr/local/opt/elasticsearch@2.4/bin:$PATH"
 
+# Pyenv
+
+# eval "$(pyenv init -)"
+# eval "$(pyenv virtualenv-init -)"
+export PIP_REQUIRE_VIRTUALENV=true
 export PATH
