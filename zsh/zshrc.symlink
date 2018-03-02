@@ -54,18 +54,16 @@ if [[ $TERM_PROGRAM == "Apple_Terminal" ]] && [[ -z "$INSIDE_EMACS" ]] {
   chpwd
 }
 
-# Python
-
-PATH=/usr/local/Cellar/python3/3.4.3/Frameworks/Python.framework/Versions/3.4/bin:$PATH
-
-# Virtualenv
+# Python & Virtualenv
 
 export PYTHONPATH=${PYTHONPATH}:/usr/bin
+export PIP_REQUIRE_VIRTUALENV=true
 export WORKON_HOME=~/.envs
-export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
+export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python
 source /usr/local/bin/virtualenvwrapper.sh
 
 ### Added by the Heroku Toolbelt
+
 PATH="/usr/local/heroku/bin:$PATH"
 
 # Dynamically set NPM_TOKEN from .npmrc
@@ -80,7 +78,7 @@ source $(brew --prefix nvm)/nvm.sh
 # Add gcloud executables to $PATH
 # https://cloud.google.com/sdk/docs/
 
-PATH=~/src/google-cloud-sdk/bin/:$PATH
+PATH=~/src/google-cloud-sdk/bin:$PATH
 
 # Stop trying to correct 'tsc'
 
@@ -124,11 +122,7 @@ _yargs_completions()
 }
 complete -F _yargs_completions doing
 ###-end-doing-completions-###
+
 PATH="/usr/local/opt/elasticsearch@2.4/bin:$PATH"
 
-# Pyenv
-
-# eval "$(pyenv init -)"
-# eval "$(pyenv virtualenv-init -)"
-export PIP_REQUIRE_VIRTUALENV=true
 export PATH

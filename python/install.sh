@@ -1,3 +1,4 @@
 #!/bin/sh
 
-# brew install pyenv
+brew install python;
+sudo pip install virtualenvwrapper;
