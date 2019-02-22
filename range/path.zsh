@@ -1,3 +1,3 @@
 # Range Git Workflow
 
-export PATH="/Users/chrisforrette/Projects/git-workflow:$PATH"
+export PATH="~/Projects/git-workflow:$PATH"

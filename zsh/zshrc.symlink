@@ -75,8 +75,4 @@ alias tsc='nocorrect tsc'
 
 PATH="/usr/local/opt/elasticsearch@2.4/bin:$PATH"
 
-# Range Git Workflow
-
-export PATH="/Users/chrisforrette/Projects/git-workflow:$PATH"
-
 export PATH

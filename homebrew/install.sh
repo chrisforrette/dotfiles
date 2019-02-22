@@ -12,6 +12,12 @@ then
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
+brew update
+
+# Install everything from Brewfile
+
+brew bundle install
+
 # Install homebrew packages
 brew install grc coreutils spark jpeg
 
