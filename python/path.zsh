@@ -13,4 +13,6 @@ export PYTHONPATH=${PYTHONPATH}:/usr/bin
 export WORKON_HOME=~/.envs
 export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python
 
+export PATH
+
 source /usr/local/bin/virtualenvwrapper.sh
