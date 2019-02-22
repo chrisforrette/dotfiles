@@ -54,14 +54,6 @@ if [[ $TERM_PROGRAM == "Apple_Terminal" ]] && [[ -z "$INSIDE_EMACS" ]] {
   chpwd
 }
 
-# Python & Virtualenv
-
-export PYTHONPATH=${PYTHONPATH}:/usr/bin
-export PIP_REQUIRE_VIRTUALENV=true
-export WORKON_HOME=~/.envs
-export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python
-source /usr/local/bin/virtualenvwrapper.sh
-
 ### Added by the Heroku Toolbelt
 
 PATH="/usr/local/heroku/bin:$PATH"
@@ -75,54 +67,16 @@ export NPM_TOKEN=$(cat ~/.npmrc | sed -e "s/^\/\/registry\.npmjs\.org\/:_authTok
 export NVM_DIR=~/.nvm
 source $(brew --prefix nvm)/nvm.sh
 
-# Add gcloud executables to $PATH
-# https://cloud.google.com/sdk/docs/
+# Stop trying to correct things I use
 
-PATH=~/src/google-cloud-sdk/bin:$PATH
-
-# Stop trying to correct 'tsc'
-
+alias gulp='nocorrect gulp'
+alias serverless='nocorrect serverless'
 alias tsc='nocorrect tsc'
 
-# Stop trying to correct 'serverless'
-
-alias serverless='nocorrect serverless'
-
-###-begin-doing-completions-###
-#
-# yargs command completion script
-#
-# Installation: doing completion >> ~/.bashrc
-#    or doing completion >> ~/.bash_profile on OSX.
-#
-
-# Load ZSH `complete`
-
-autoload bashcompinit
-bashcompinit
-
-_yargs_completions()
-{
-    local cur_word args type_list
-
-    cur_word="${COMP_WORDS[COMP_CWORD]}"
-    args=("${COMP_WORDS[@]}")
-
-    # ask yargs to generate completions.
-    type_list=$(doing --get-yargs-completions "${args[@]}")
-
-    COMPREPLY=( $(compgen -W "${type_list}" -- ${cur_word}) )
-
-    # if no match was found, fall back to filename completion
-    if [ ${#COMPREPLY[@]} -eq 0 ]; then
-      COMPREPLY=( $(compgen -f -- "${cur_word}" ) )
-    fi
-
-    return 0
-}
-complete -F _yargs_completions doing
-###-end-doing-completions-###
-
 PATH="/usr/local/opt/elasticsearch@2.4/bin:$PATH"
+
+# Range Git Workflow
+
+export PATH="/Users/chrisforrette/Projects/git-workflow:$PATH"
 
 export PATH
