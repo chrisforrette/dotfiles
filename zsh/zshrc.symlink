@@ -58,15 +58,6 @@ if [[ $TERM_PROGRAM == "Apple_Terminal" ]] && [[ -z "$INSIDE_EMACS" ]] {
 
 PATH="/usr/local/heroku/bin:$PATH"
 
-# Dynamically set NPM_TOKEN from .npmrc
-
-export NPM_TOKEN=$(cat ~/.npmrc | sed -e "s/^\/\/registry\.npmjs\.org\/:_authToken=//")
-
-# Node virtualenv
-
-export NVM_DIR=~/.nvm
-source $(brew --prefix nvm)/nvm.sh
-
 # Stop trying to correct things I use
 
 alias gulp='nocorrect gulp'
@@ -74,5 +65,14 @@ alias serverless='nocorrect serverless'
 alias tsc='nocorrect tsc'
 
 PATH="/usr/local/opt/elasticsearch@2.4/bin:$PATH"
+# :/usr/local/opt/libpq/bin
+# Libpq
+
+export LDFLAGS="-L/usr/local/opt/openssl/lib"
+# export LDFLAGS="-L/usr/local/opt/libpq/lib"
+# export CPPFLAGS="-I/usr/local/opt/libpq/include"
+
+# Use Terraform 0.11
+PATH="/usr/local/opt/terraform@0.11/bin:$PATH"
 
 export PATH

@@ -1,6 +1,8 @@
 # CLI tools
 
 brew "awscli"
+brew "docker"
+brew "mysql"
 brew "openssl"
 brew "terraform"
 
@@ -12,6 +14,7 @@ cask "docker"
 cask "dropbox"
 cask "evernote"
 cask "google-chrome"
+cask "mysqlworkbench"
 cask "pritunl"
 cask "slack"
 cask "spotify"
