@@ -1,9 +1,5 @@
 export PATH="node_modules/.bin:$PATH"
 
-# Dynamically set NPM_TOKEN from .npmrc
-
-export NPM_TOKEN=$(cat ~/.npmrc | sed -e "s/^\/\/registry\.npmjs\.org\/:_authToken=//")
-
 # NVM config/init
 
 export NVM_DIR=~/.nvm
