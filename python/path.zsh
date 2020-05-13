@@ -15,4 +15,6 @@ export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python
 
 export PATH
 
-source /usr/local/bin/virtualenvwrapper.sh
+if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
+	source /usr/local/bin/virtualenvwrapper.sh
+fi
