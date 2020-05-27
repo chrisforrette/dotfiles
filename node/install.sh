@@ -1,6 +1,6 @@
 #!/bin/sh
 
-brew install node nvm
+brew install nvm
 
 if [ ! -d ~/.nvm ]; then
 	mkdir ~/.nvm
