@@ -1,7 +1,5 @@
 # CLI tools
 
-brew "awscli"
-brew "awslogs"
 brew "docker"
 brew "jq"
 brew "mysql"
