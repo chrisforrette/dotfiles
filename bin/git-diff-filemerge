@@ -1,2 +1,4 @@
 #!/bin/zsh 
-/usr/bin/opendiff "$2" "$5" -merge "$1"
+# Open FileMerge
+open --fresh `xcode-select --print-path`/../Applications/FileMerge.app
+/usr/bin/opendiff "$2" "$5" -merge "$5"

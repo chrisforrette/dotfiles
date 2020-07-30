@@ -16,7 +16,7 @@ brew update
 
 # Install basic homebrew packages
 
-brew install grc coreutils openssl spark jpeg
+brew install mas grc coreutils openssl spark jpeg
 
 # Install everything from Brewfile
 
