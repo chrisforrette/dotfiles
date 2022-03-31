@@ -2,8 +2,10 @@
 
 brew "docker"
 brew "jq"
-brew "mysql"
+# brew "mysql"
 brew "openssl"
+brew "tmux"
+brew "wget"
 
 # Casks
 
