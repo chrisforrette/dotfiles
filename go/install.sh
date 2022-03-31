@@ -1,2 +1,3 @@
 #!/bin/sh
-brew install go || true
+
+brew list go || brew install go
