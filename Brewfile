@@ -1,5 +1,6 @@
 # CLI tools
 
+brew "awscli"
 brew "docker"
 brew "jq"
 # brew "mysql"
@@ -16,7 +17,6 @@ cask "dropbox"
 cask "evernote"
 cask "google-chrome"
 cask "keybase"
-cask "paw"
 cask "slack"
 cask "spotify"
 cask "sublime-text"
