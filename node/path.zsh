@@ -3,6 +3,8 @@ export PATH="node_modules/.bin:$PATH"
 # NVM config/init
 
 export NVM_DIR=~/.nvm
+[ -s "$(brew --prefix nvm)/nvm.sh" ] && \. "$(brew --prefix nvm)/nvm.sh"  # This loads nvm
+  # [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 # source $(brew --prefix nvm)/nvm.sh
 

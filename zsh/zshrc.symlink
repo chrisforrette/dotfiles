@@ -69,3 +69,10 @@ if [ -f '/Users/chrisforrette/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/c
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/chrisforrette/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/chrisforrette/google-cloud-sdk/completion.zsh.inc'; fi
+
+# 1Password
+
+source ~/.config/op/plugins.sh
+export PATH="$HOME/.gobrew/current/bin:$HOME/.gobrew/bin:$PATH"
+export PATH="$HOME/.localdev/gotestsum:$PATH"
+export PATH="$HOME/.localdev/golangci-lint:$PATH"

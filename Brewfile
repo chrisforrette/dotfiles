@@ -16,11 +16,10 @@ cask "docker"
 cask "dropbox"
 cask "evernote"
 cask "google-chrome"
-cask "keybase"
 cask "slack"
 cask "spotify"
 cask "sublime-text"
-cask "zoomus"
+cask "zoom"
 
 # Mac App Store
 
@@ -32,5 +31,4 @@ mas "Todoist", id: 585829637
 brew "ansible"
 cask "aws-vault"
 brew "packer"
-cask "pritunl"
 cask "sequel-pro"
