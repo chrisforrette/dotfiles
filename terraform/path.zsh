@@ -9,3 +9,5 @@ load-tfswitch() {
 }
 add-zsh-hook chpwd load-tfswitch
 load-tfswitch
+
+export PATH="$HOME/bin:$PATH"

@@ -1,3 +1,3 @@
 #!/bin/sh
 
-brew list go || brew install go
+# brew list go || brew install go

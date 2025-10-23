@@ -12,6 +12,9 @@ then
   source ~/.localrc
 fi
 
+# Homebrew path configuration (needed by some other )
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 # all of our zsh files
 typeset -U config_files
 config_files=($ZSH/**/*.zsh)
@@ -72,7 +75,26 @@ if [ -f '/Users/chrisforrette/google-cloud-sdk/completion.zsh.inc' ]; then . '/U
 
 # 1Password
 
-source ~/.config/op/plugins.sh
+if [ -f '~/.config/op/plugins.sh' ]; then
+  source ~/.config/op/plugins.sh
+fi
+
+# Golang
+
 export PATH="$HOME/.gobrew/current/bin:$HOME/.gobrew/bin:$PATH"
+
+# GoLand
+
+export PATH="/Applications/GoLand.app/Contents/MacOS:$PATH"
+
+# MySQL
+
+#export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
+
+# Splice API
+
 export PATH="$HOME/.localdev/gotestsum:$PATH"
 export PATH="$HOME/.localdev/golangci-lint:$PATH"
+export PATH="$HOME/.localdev/mockery:$PATH"
+
+alias localdev="source $GOPATH/src/github.com/splice/api/localdev.sh"

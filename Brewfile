@@ -3,20 +3,19 @@
 brew "awscli"
 brew "docker"
 brew "jq"
-# brew "mysql"
 brew "openssl"
-brew "tmux"
 brew "wget"
 
 # Casks
 
 cask_args appdir: "/Applications"
-cask "1password"
+#cask "1password"
+cask "1password-cli"
 cask "docker"
-cask "dropbox"
-cask "evernote"
-cask "google-chrome"
-cask "slack"
+cask "goland"
+#cask "google-chrome"
+cask "obsidian"
+#cask "slack"
 cask "spotify"
 cask "sublime-text"
 cask "zoom"
@@ -24,11 +23,14 @@ cask "zoom"
 # Mac App Store
 
 mas "Fantastical", id: 975937182
+mas "Monosnap", id: 540348655
 mas "Todoist", id: 585829637
+mas "Tailscale", id: 1475387142 # Tailscale: https://tailscale.com/kb/1065/macos-variants#automating-app-store-installs
 
 # Splice
 
 brew "ansible"
-cask "aws-vault"
+brew "kubectl"
+brew "mysql-client@8.4" # We're not on v9 yet and it breaks stuff
 brew "packer"
-cask "sequel-pro"
+brew "saml2aws"
