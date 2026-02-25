@@ -1,0 +1,8 @@
+# Splice work tools
+
+brew "ansible"
+brew "kubectl"
+brew "mysql-client@8.4" # We're not on v9 yet and it breaks stuff
+brew "packer"
+brew "saml2aws"
+mas "Tailscale", id: 1475387142 # https://tailscale.com/kb/1065/macos-variants#automating-app-store-installs

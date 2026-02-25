@@ -9,14 +9,14 @@
 if test ! $(which brew)
 then
   echo "Installing Homebrew for you."
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
 brew update
 
 # Install basic homebrew packages
 
-brew install mas grc coreutils openssl spark jpeg
+brew install mas grc coreutils openssl
 
 # Install everything from Brewfile
 
