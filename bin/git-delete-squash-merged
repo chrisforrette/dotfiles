@@ -1,0 +1,41 @@
+#!/bin/sh
+
+# This script deletes local branches that have been squash-merged into the remote main branch
+#
+# Usage:
+#
+#   Dry run:
+#     git-delete-squash-merged --dry-run
+#
+#   Actually delete branches:
+#     git-delete-squash-merged
+
+
+DRY_RUN=false
+
+# Parse arguments
+while [[ $# -gt 0 ]]; do
+  case $1 in
+    --dry-run)
+      DRY_RUN=true
+      shift
+      ;;
+    *)
+      echo "Unknown option: $1"
+      exit 1
+      ;;
+  esac
+done
+
+MAIN_BRANCH=$(git remote show origin | grep 'HEAD branch' | cut -d' ' -f5)
+
+git checkout -q $MAIN_BRANCH && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do
+  mergeBase=$(git merge-base $MAIN_BRANCH $branch)
+  if [[ $(git cherry $MAIN_BRANCH $(git commit-tree $(git rev-parse "$branch^{tree}") -p $mergeBase -m _)) == "-"* ]]; then
+    if [ "$DRY_RUN" = true ]; then
+      echo "$branch is merged into $MAIN_BRANCH and can be deleted"
+    else
+      git branch -D $branch
+    fi
+  fi
+done
