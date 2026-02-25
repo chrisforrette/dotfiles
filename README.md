@@ -1,88 +1,236 @@
-# Chris Forrette does dotfiles
+# Chris Forrette's dotfiles
 
-## dotfiles
+A topic-based, portable development environment for macOS. Clone it, run two scripts, and a new machine is ready to work.
 
-Your dotfiles are how you personalize your system. These are mine.
+---
 
-I was a little tired of having long alias files and everything strewn about
-(which is extremely common on other dotfiles projects, too). That led to this
-project being much more topic-centric. I realized I could split a lot of things
-up into the main areas I used (Ruby, git, system libraries, and so on), so I
-structured the project accordingly.
+## Getting started on a fresh machine
 
-If you're interested in the philosophy behind why projects like these are
-awesome, you might want to [read my post on the
-subject](http://zachholman.com/2010/08/dotfiles-are-meant-to-be-forked/).
+### Prerequisites
 
-## install
+On a brand new Mac, Xcode Command Line Tools must be installed before anything else — git won't work without them:
 
-Run this:
+```sh
+xcode-select --install
+```
+
+### 1. Clone the repo
 
 ```sh
 git clone https://github.com/chrisforrette/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
+```
+
+### 2. Bootstrap
+
+Bootstrap handles the one-time setup: configuring git, symlinking dotfiles into `$HOME`, installing Homebrew, and installing everything in the Brewfile.
+
+```sh
 script/bootstrap
 ```
 
-This will symlink the appropriate files in `.dotfiles` to your home directory.
-Everything is configured and tweaked within `~/.dotfiles`.
+You'll be prompted for your git author name and email if `git/gitconfig.symlink` doesn't exist yet.
 
-The main file you'll want to change right off the bat is `zsh/zshrc.symlink`,
-which sets up a few paths that'll be different on your particular machine.
+### 3. Install
 
-`dot` is a simple script that installs some dependencies, sets sane OS X
-defaults, and so on. Tweak this script, and occasionally run `dot` from
-time to time to keep your environment fresh and up-to-date. You can find
-this script in `bin/`.
+Install runs all `install.sh` scripts across every topic directory — language runtimes, tools, and other per-topic setup.
 
-## topical
+```sh
+script/install
+```
 
-Everything's built around topic areas. If you're adding a new area to your
-forked dotfiles — say, "Java" — you can simply add a `java` directory and put
-files in there. Anything with an extension of `.zsh` will get automatically
-included into your shell. Anything with an extension of `.symlink` will get
-symlinked without extension into `$HOME` when you run `script/bootstrap`.
+### 4. Work machine setup (optional)
 
-## what's inside
+If this is a Splice work machine, create the marker file before running `script/install`:
 
-A lot of stuff. Seriously, a lot of stuff. Check them out in the file browser
-above and see what components may mesh up with you.
-[Fork it](https://github.com/chrisforrette/dotfiles/fork), remove what you don't
-use, and build on what you do use.
+```sh
+touch ~/.splice
+```
 
-## components
+This causes `splice/install.sh` to install work-specific dependencies (kubectl, saml2aws, ansible, packer, Tailscale, etc.) from `splice/Brewfile`. Without the marker, that step is silently skipped.
 
-There's a few special files in the hierarchy.
+### 5. Restart your shell
 
-- **bin/**: Anything in `bin/` will get added to your `$PATH` and be made
-  available everywhere.
-- **topic/\*.zsh**: Any files ending in `.zsh` get loaded into your
-  environment.
-- **topic/path.zsh**: Any file named `path.zsh` is loaded first and is
-  expected to setup `$PATH` or similar.
-- **topic/completion.zsh**: Any file named `completion.zsh` is loaded
-  last and is expected to setup autocomplete.
-- **topic/\*.symlink**: Any files ending in `*.symlink` get symlinked into
-  your `$HOME`. This is so you can keep all of those versioned in your dotfiles
-  but still keep those autoloaded files in your home directory. These get
-  symlinked in when you run `script/bootstrap`.
+```sh
+exec zsh
+```
 
-## bugs
+---
 
-I want this to work for everyone; that means when you clone it down it should
-work for you even though you may not have `rbenv` installed, for example. That
-said, I do use this as *my* dotfiles, so there's a good chance I may break
-something if I forget to make a check for a dependency.
+## How-to guides
 
-If you're brand-new to the project and run into any blockers, please
-[open an issue](https://github.com/holman/dotfiles/issues) on this repository
-and I'd love to get it fixed for you!
+### Add a new technology or tool
 
-## thanks
+Create a directory for the topic and add any combination of the following files:
 
-I forked [Ryan Bates](http://github.com/ryanb)' excellent
-[dotfiles](http://github.com/ryanb/dotfiles) for a couple years before the
-weight of my changes and tweaks inspired me to finally roll my own. But Ryan's
-dotfiles were an easy way to get into bash customization, and then to jump ship
-to zsh a bit later. A decent amount of the code in these dotfiles stem or are
-inspired from Ryan's original project.
+```sh
+mkdir ~/.dotfiles/mytool
+```
+
+- `mytool/install.sh` — installs the tool (run by `script/install`)
+- `mytool/path.zsh` — adds to `$PATH`, loaded first on shell startup
+- `mytool/aliases.zsh` — shell aliases, loaded on shell startup
+- `mytool/completion.zsh` — tab completion, loaded last on shell startup
+- `mytool/config.zsh` — any other shell configuration
+
+Only create the files you need — none are required.
+
+To install a Homebrew package, add it to `Brewfile` instead and run `brew bundle install`.
+
+### Remove a technology or tool
+
+1. Delete the topic directory: `rm -rf ~/.dotfiles/mytool`
+2. If it has a Brewfile entry, remove it and run `brew bundle install`
+3. If it had a `.symlink` file, remove the symlink from `$HOME`: `rm ~/.<filename>`
+
+### Add a runtime version (Node, Python, Go, etc.)
+
+Runtimes are managed by [Mise](https://mise.jdx.dev). To install a runtime globally:
+
+```sh
+mise use -g node@22
+mise use -g python@3.12
+mise use -g go@1.22
+```
+
+To pin a version for a specific project, run the same command from inside the project directory (without `-g`). Mise will create a `.mise.toml` file in the project root.
+
+### Add machine-local configuration
+
+Anything that shouldn't be committed to the repo — API keys, private aliases, machine-specific paths — goes in `~/.localrc`. This file is sourced automatically if it exists and is not tracked by git.
+
+```sh
+# ~/.localrc
+export SECRET_API_KEY="..."
+alias work="cd ~/Code/work-project"
+```
+
+### Keep dotfiles in sync
+
+Pull the latest changes and re-run install:
+
+```sh
+cd ~/.dotfiles
+git pull
+script/install
+```
+
+For Homebrew packages specifically:
+
+```sh
+brew bundle install
+```
+
+### Add a new employer's machine profile
+
+The `splice/` directory is a template for employer-specific tooling. To add a new employer:
+
+1. Create a new directory: `mkdir ~/.dotfiles/<employer>`
+2. Add a `<employer>/Brewfile` with employer-specific packages
+3. Add a `<employer>/install.sh` that checks for a marker file:
+
+```sh
+#!/bin/sh
+if [ -f "$HOME/.<employer>" ]; then
+  echo ".<employer> detected — installing dependencies..."
+  brew bundle install --file="$(dirname "$0")/Brewfile"
+else
+  echo "Skipping <employer> dependencies (no ~/.<employer> marker found)"
+fi
+```
+
+4. On employer machines, `touch ~/.<employer>` before running `script/install`
+
+---
+
+## Reference
+
+### Directory structure
+
+```
+~/.dotfiles/
+├── bin/                    # Scripts added to $PATH automatically
+├── claude/                 # Claude CLI setup
+├── functions/              # Zsh functions (autoloaded)
+├── git/                    # Git config, aliases, and completion
+├── go/                     # Go environment (GOPATH)
+├── homebrew/               # Homebrew install and PATH setup
+├── mise/                   # Mise runtime manager
+├── node/                   # Node local bin PATH
+├── osx/                    # macOS system defaults
+├── splice/                 # Splice (work) machine dependencies
+├── system/                 # Core aliases, environment, and PATH
+├── terraform/              # Terraform/OpenTofu version switcher
+├── zsh/                    # Zsh config, prompt, and aliases
+├── Brewfile                # Homebrew packages for all machines
+├── script/bootstrap        # One-time machine setup
+└── script/install          # Runs all install.sh scripts
+```
+
+### File naming conventions
+
+| Filename | When it's loaded | Purpose |
+|---|---|---|
+| `path.zsh` | First, on every shell startup | `$PATH` modifications |
+| `*.zsh` | Second, on every shell startup | Aliases, config, functions |
+| `completion.zsh` | Last, on every shell startup | Tab completion setup |
+| `*.symlink` | Once, during `script/bootstrap` | Symlinked into `$HOME` as `.<filename>` |
+| `install.sh` | Once, during `script/install` | Tool installation |
+
+### Symlinked files
+
+| Source | Symlinked to |
+|---|---|
+| `git/gitconfig.symlink` | `~/.gitconfig` |
+| `git/gitignore.symlink` | `~/.gitignore` |
+| `zsh/zshrc.symlink` | `~/.zshrc` |
+
+### bin/ scripts
+
+Scripts in `bin/` are added to `$PATH` and available everywhere:
+
+| Script | Description |
+|---|---|
+| `dot` | Re-runs macOS defaults and Homebrew setup; run occasionally to stay current |
+| `e` | Open a file or directory in `$EDITOR` |
+| `git-wtf` | Shows the state of all branches relative to their upstreams |
+| `git-promote` | Push the current branch and set up remote tracking |
+| `git-nuke` | Delete a branch locally and remotely |
+| `git-undo` | Soft reset the last commit |
+| `git-unpushed` | Show a diff of all unpushed commits |
+| `git-delete-local-merged` | Delete all local branches already merged into main |
+| `headers` | Print HTTP response headers for a URL |
+| `todo` | Create an empty todo file on the Desktop |
+
+### Machine profiles
+
+| Marker file | Profile | Installs |
+|---|---|---|
+| *(none)* | Personal | Everything in `Brewfile` |
+| `~/.splice` | Splice (work) | + `splice/Brewfile` |
+
+---
+
+## How it works
+
+### Shell startup
+
+On every new shell, `~/.zshrc` (symlinked from `zsh/zshrc.symlink`) does the following in order:
+
+1. Sources `~/.localrc` if it exists (private, machine-local config)
+2. Loads all `path.zsh` files across every topic directory
+3. Loads all other `.zsh` files across every topic directory
+4. Initializes zsh autocompletion
+5. Loads all `completion.zsh` files across every topic directory
+
+Path files load first to ensure `$PATH` is fully configured before any other shell code runs. Within path files, `homebrew/path.zsh` initializes Homebrew (and its `$PATH` entries) before other tools that depend on it.
+
+### Bootstrap vs install
+
+`script/bootstrap` is a **one-time setup** script. It creates `~/.gitconfig`, symlinks all `.symlink` files into `$HOME`, and kicks off Homebrew installation.
+
+`script/install` is meant to be **re-run any time**. It runs every `install.sh` across all topic directories. Running it again is safe — most installers are idempotent.
+
+### Runtime management
+
+Language runtimes (Node, Python, Go, etc.) are managed by [Mise](https://mise.jdx.dev), a single tool that replaces nvm, pyenv, rbenv, and similar per-language version managers. Mise is installed via Homebrew and activated in every shell via `mise/path.zsh`.
