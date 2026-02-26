@@ -1,5 +1,6 @@
 # CLI tools
 
+brew "ack"
 brew "awscli"
 brew "docker"
 brew "gh"
