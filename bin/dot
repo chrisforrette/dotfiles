@@ -12,6 +12,9 @@ $ZSH/osx/set-defaults.sh
 # Install homebrew
 $ZSH/homebrew/install.sh 2>&1
 
-# Upgrade homebrew
+# Update homebrew
 echo "› brew update"
 brew update
+
+# Install Brewfile packages
+brew bundle install --file=$ZSH/Brewfile

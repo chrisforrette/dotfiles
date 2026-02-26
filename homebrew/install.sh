@@ -25,8 +25,4 @@ brew update
 
 brew install mas grc coreutils openssl
 
-# Install everything from Brewfile
-
-brew bundle install
-
 exit 0
