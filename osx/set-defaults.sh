@@ -7,6 +7,9 @@
 #
 # Run ./set-defaults.sh and you'll be good to go.
 
+# Play sound feedback when changing volume.
+defaults write -g com.apple.sound.beep.feedback -int 1
+
 # Disable press-and-hold for keys in favor of key repeat.
 defaults write -g ApplePressAndHoldEnabled -bool false
 
