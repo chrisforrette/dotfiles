@@ -42,3 +42,15 @@ defaults write com.apple.Safari IncludeDevelopMenu -bool true 2>/dev/null || tru
 defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true 2>/dev/null || true
 defaults write com.apple.Safari "com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled" -bool true 2>/dev/null || true
 defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
+
+# Keyboard shortcut: Ctrl+Up for Mission Control / show all windows (shortcut IDs 32 and 34).
+# -dict-add is safe to run multiple times (overwrites, doesn't duplicate).
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 32 "<dict><key>enabled</key><true/><key>value</key><dict><key>parameters</key><array><integer>65535</integer><integer>126</integer><integer>8650752</integer></array><key>type</key><string>standard</string></dict></dict>"
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 34 "<dict><key>enabled</key><true/><key>value</key><dict><key>parameters</key><array><integer>65535</integer><integer>126</integer><integer>8781824</integer></array><key>type</key><string>standard</string></dict></dict>"
+
+# Keyboard shortcut: Ctrl+1 for Launchpad (shortcut ID 160).
+# -dict-add is safe to run multiple times (overwrites, doesn't duplicate).
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 160 "<dict><key>enabled</key><true/><key>value</key><dict><key>parameters</key><array><integer>49</integer><integer>18</integer><integer>262144</integer></array><key>type</key><string>standard</string></dict></dict>"
+# Applies symbolic hotkey changes immediately by restarting UI services.
+# Safe to run repeatedly but mildly disruptive if the machine is in active use.
+/System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
