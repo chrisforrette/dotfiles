@@ -1,3 +1,6 @@
+# tfswitch installs binaries to ~/bin by default
+export PATH="$HOME/bin:$PATH"
+
 # See: https://github.com/warrensbox/terraform-switcher#automation
 autoload -U add-zsh-hook
 load-tfswitch() {
