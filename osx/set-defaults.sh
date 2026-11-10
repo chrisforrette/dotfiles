@@ -29,6 +29,10 @@ defaults write NSGlobalDomain KeyRepeat -int 1
 defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
 defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
 
+# Don't shove every window aside when clicking the desktop wallpaper.
+# (System Settings > Desktop & Dock > "Click wallpaper to reveal desktop" = Only in Stage Manager)
+defaults write com.apple.WindowManager EnableStandardClickToShowDesktop -bool false
+
 # Run the screensaver if we're in the bottom-left hot corner.
 defaults write com.apple.dock wvous-bl-corner -int 5
 defaults write com.apple.dock wvous-bl-modifier -int 0
