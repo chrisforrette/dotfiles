@@ -1,0 +1,4 @@
+# Splitwise work tools
+
+brew "rbenv"
+brew "ruby-build"

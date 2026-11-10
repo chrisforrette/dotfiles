@@ -38,9 +38,10 @@ Files named `_path.zsh` (e.g. `system/_path.zsh`) do NOT load in the path phase 
 
 - **Symlinked files**: `git/gitconfig.symlink` → `~/.gitconfig`, `git/gitignore.symlink` → `~/.gitignore`, `zsh/zshrc.symlink` → `~/.zshrc`
 - **Private/local config**: goes in `~/.localrc`, which is sourced automatically if it exists and is never committed
-- **Work machine**: create `~/.splice` before running `script/install` to trigger `splice/install.sh`, which installs work-specific packages from `splice/Brewfile`
+- **Work machine**: create `~/.splitwise` before running `script/install` to trigger `splitwise/install.sh`, which installs work-specific packages from `splitwise/Brewfile`. `splice/` follows the same pattern (`~/.splice`) for a previous employer and is kept as a template
+- **Ruby version management**: `splitwise/rbenv.zsh` runs `rbenv init` when rbenv is installed (Splitwise onboarding installs it); Mise remains the preferred manager and is activated in `mise/path.zsh`. Never hardcode tool paths like `~/.local/bin/mise` in `zshrc.symlink` — topic files load after `homebrew/path.zsh`, so Homebrew-installed tools are already on `$PATH`
 - **Runtime versions**: managed by Mise (`mise/path.zsh`); individual language version managers (nvm, pyenv, etc.) are not used
-- **Homebrew packages**: add to `Brewfile` for personal tools, `splice/Brewfile` for work-only tools
+- **Homebrew packages**: add to `Brewfile` for personal tools, `splitwise/Brewfile` for work-only tools
 - **`bin/` scripts**: automatically on `$PATH` via `system/_path.zsh`; includes git helper scripts (`git-wtf`, `git-nuke`, `git-undo`, etc.)
 
 ## Adding a new topic

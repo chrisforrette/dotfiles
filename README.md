@@ -41,13 +41,16 @@ script/install
 
 ### 4. Work machine setup (optional)
 
-If this is a Splice work machine, create the marker file before running `script/install`:
+If this is a work machine, create the employer's marker file before running `script/install`:
 
 ```sh
-touch ~/.splice
+touch ~/.splitwise   # Splitwise
+touch ~/.splice      # Splice (previous employer, kept as a template)
 ```
 
-This causes `splice/install.sh` to install work-specific dependencies (kubectl, saml2aws, ansible, packer, Tailscale, etc.) from `splice/Brewfile`. Without the marker, that step is silently skipped.
+This causes the matching `<employer>/install.sh` to install work-specific dependencies from `<employer>/Brewfile` (for Splitwise: rbenv and ruby-build). Without the marker, that step is silently skipped.
+
+`splitwise/rbenv.zsh` initializes rbenv on every shell startup when rbenv is installed, so it is a no-op on personal machines.
 
 ### 5. Restart your shell
 
@@ -158,7 +161,8 @@ fi
 ├── mise/                   # Mise runtime manager
 ├── node/                   # Node local bin PATH
 ├── osx/                    # macOS system defaults
-├── splice/                 # Splice (work) machine dependencies
+├── splice/                 # Splice (previous work) machine dependencies
+├── splitwise/              # Splitwise (work) machine dependencies and rbenv init
 ├── system/                 # Core aliases, environment, and PATH
 ├── terraform/              # Terraform/OpenTofu version switcher
 ├── zsh/                    # Zsh config, prompt, and aliases
@@ -207,7 +211,8 @@ Scripts in `bin/` are added to `$PATH` and available everywhere:
 | Marker file | Profile | Installs |
 |---|---|---|
 | *(none)* | Personal | Everything in `Brewfile` |
-| `~/.splice` | Splice (work) | + `splice/Brewfile` |
+| `~/.splitwise` | Splitwise (work) | + `splitwise/Brewfile` |
+| `~/.splice` | Splice (previous work) | + `splice/Brewfile` |
 
 ---
 
