@@ -26,5 +26,6 @@ cask "zoom"
 # Mac App Store
 
 mas "Fantastical", id: 975937182
+mas "Flow", id: 1423210932 # Pomodoro timer
 mas "Monosnap", id: 540348655
 mas "Todoist", id: 585829637
